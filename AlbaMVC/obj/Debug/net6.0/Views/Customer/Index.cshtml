@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Customers>
+<style>
+    .custom-dropdown2 {
+        min-width: 150px;
+        padding: 6px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .box {
+        border: 1px solid #ccc;
+        padding: 40px;
+        background-color: #f7f7f7;
+        width: 400px;
+        margin: 20px auto;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+        float:left;
+    }
+</style>
+<div style="text-align:center"><h1>Senaryo Sayfası</h1></div>
+
+
+<table id="customerTable" class="table table-bordered" style="text-align:center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Müşteri No</th>
+            <th>Müşteri Adı</th>
+            <th>Yaş</th>
+            <th>Kart Sahibi</th>
+            <th>Segment Adı</th>
+            <th>Meslek</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CustomerNo</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Age</td>
+                <td>
+                    @if (item.CardStatus)
+                    {
+                        <span>Mevcut</span>
+                    }
+                    else
+                    {
+                        <span>Mevcut Değil</span>
+                    }
+                </td>
+                <td>@item.Segment</td>
+                <td>@item.Occupation</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    
+    <div class="box" style="margin-right:20px">
+        <h2 style="text-align: center; margin-top: -25px;">Senaryo Kuralları</h2>
+        @*<div></div>*@
+        <div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="margin-top:20px;">
+                <select id="selectedProcessVariable" name="selectedProcessVariable" onchange="loadSelectedData()">
+                    <option value="">İşlem Değeri</option>
+                    @foreach (var item in ViewBag.ProcessVariable)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+
+            </div>
+            <div style="margin-top:20px;">
+                <select id="comparisonOptionsDiv">
+                    <option value="=">=</option>
+                    <option value=">">></option>
+                    <option value="<"><</option>
+                </select>
+            </div>
+            <div class="container" style="margin-top:25px; margin-right:50px">
+                <select id="dynamicDropdown">
+                    <option value="">Değer Seçiniz</option>
+                </select>
+                <button id="resetFilterButton" style="background-color: bisque; margin-left:20px;">Tümünü Göster</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="box" style="height: 244.50px;">
+        <h2 style="text-align: center; margin-top: -25px;">Kampanya Seçimi</h2>
+        <div style="text-align: center; margin-top:45px;">
+            <select id="campaignDropdown" name="campaignDropdown">
+                <option value="">Select a Campaign</option>
+                @foreach (var campaign in ViewBag.Campaigns)
+                {
+                    <option value="@campaign.Value">@campaign.Text</option>
+                }
+            </select>
+            <button>Ekle</button>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadSelectedData() {
+        var selectedValue = $("#selectedProcessVariable").val();
+        if (selectedValue === "Age") {
+            $("#comparisonOptionsDiv").show(); 
+        } else {
+            $("#comparisonOptionsDiv").hide(); 
+        }
+        $.get("/Customer/GetSelectedVariable", { chosen: selectedValue }, function (data) {
+            $('#dynamicDropdown').empty();
+            var container = $("#dynamicDropdown");
+
+            $.each(data, function (index, item) {
+                container.append($("<option>")
+                    .prop('value', item.value)
+                    .text(item.text));
+            });
+        });
+    }
+
+    function resetFilter() {
+        $("#customerTable tbody tr").show();
+    }
+
+    $("#resetFilterButton").click(resetFilter);
+
+    function filterTable() {
+        var selectedColumnName = $("#selectedProcessVariable option:selected").text();
+        var selectedText = $("#dynamicDropdown option:selected").text();
+
+        var columnIndex = -1;
+        $("#customerTable thead tr th").each(function (index) {
+            if ($(this).text() === selectedColumnName) {
+                columnIndex = index;
+                return false;
+            }
+        });
+
+        if (columnIndex !== -1) {
+            $("#customerTable tbody tr").each(function () {
+                var row = $(this);
+                var columnValue = row.find("td:eq(" + columnIndex + ")").text();
+
+                if (columnValue.includes(selectedText)) {
+                    row.show();
+                } else {
+                    if (selectedText.includes("-")) {
+                        var rangeValues = selectedText.split("-");
+                        var minAge = parseInt(rangeValues[0].trim(), 10);
+                        var maxAge = parseInt(rangeValues[1].trim(), 10);
+
+                        var operator = $("#comparisonOptionsDiv").val();
+
+                        var ageValue = parseInt(columnValue, 10);
+
+                        if (operator === "=") {
+                            if (ageValue >= minAge && ageValue <= maxAge) {
+                                row.show();
+                            } else {
+                                row.hide();
+                            }
+                        } else if (operator === ">") {
+                            if (ageValue > maxAge) {
+                                row.show();
+                            } else {
+                                row.hide();
+                            }
+                        } else if (operator === "<") {
+                            if (ageValue < minAge) {
+                                row.show();
+                            } else {
+                                row.hide();
+                            }
+                        } else {
+                            row.hide();
+                        }
+                    } else if (selectedText === "65 Yaş Üstü") {
+                        var ageValue = parseInt(columnValue, 10);
+                        var operator = $("#comparisonOptionsDiv").val();
+                        if(operator === "<"){
+                            if(ageValue <= 65){
+                                row.show();
+                            }
+                        }else{
+                            if(ageValue > 65){
+                                row.show();
+                            }
+                        }
+                        
+                    } else {
+                        row.hide();
+                    }
+                }
+            });
+        }
+        
+    }
+
+    $(document).ready(function () {
+        $("#dynamicDropdown").change(filterTable);
+    });
+</script>
+
+

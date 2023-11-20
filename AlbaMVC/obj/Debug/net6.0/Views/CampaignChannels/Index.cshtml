@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<CampaignChannels>
+
+<style>
+    .custom-dropdown {
+        min-width: 150px;
+        padding: 6px;
+    }
+
+    .custom-short-btn {
+        width: 170px;
+        margin-left: 16px;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-title {
+        margin: 0;
+    }
+
+    .btna {
+        padding: 10px;
+        background: #e21836;
+        background-image: linear-gradient(105deg, #ff5800, #e21836);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-bottom: 5px;
+        text-decoration: none;
+    }
+
+        .btna:hover {
+            background: #ff5800;
+        }
+</style>
+@using (Html.BeginForm("Index", "CampaignChannels", FormMethod.Get))
+{
+    <div class="container-fluid" style="display: flex; justify-content: space-between; align-items:center; width:100%">
+        <div style="display: flex; align-items: center;">
+            <b>Kampanya Adı</b>&nbsp; @Html.TextBox("ara", null, new { style = "width: 150px;" })
+           <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+        <div style="display: flex; align-items: center;">
+            <b>Kanal ID</b>&nbsp; @Html.TextBox("idSearch", null, new { style = "width: 150px;" })
+            <input style="margin-left:5px" type="submit" value="Filtrele">
+        </div>
+        <div style="display: flex; align-items: center;">
+            <b style="margin-left:15px">Dil Kodu </b>&nbsp; @Html.DropDownList("language", ViewBag.languages as SelectList, "Hepsi", new { @class = "custom-dropdown" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid" style="display:flex; justify-content:center;width:100%">
+        <div style="display: flex; align-items: center;">
+            <b>Başlangıç Tarihi </b>&nbsp; @Html.TextBox("startAction", "", new { type = "date", style = "width: 150px;" })
+            <b style="margin-left:15px">Bitiş Tarihi </b>&nbsp; @Html.TextBox("endAction", "", new { type = "date", style = "width: 150px;" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+    </div>
+}   
+
+<br />
+    
+    <div class="header-container">
+        <h2 class="header-title">KAMPANYA - KANAL DETAY</h2>
+        <a href="/CampaignChannels/Save/" class="btna">Kampanya-Kanal Ekle</a>
+    </div>
+
+    <table class="table table-bordered" style="text-align:center">
+        <thead>
+            <tr style="background-color:  indianred; font-size: 20px; font-weight: bold;">
+                <th style="background-color: #74992e; font-size: 20px; font-weight: bold;">ID</th>
+                <th>Kampanya Id</th>
+                <th>Kampanya Adı</th>
+                <th>Kanal Id</th>
+                <th>Kanal Adı</th>
+                <th>Aksiyon Başlangıç</th>
+                <th>Aksiyon Bitiş</th>
+                <th>Aksiyon Durumu</th>
+                <th>Dil Kodu</th>
+                <th>Konu</th>
+                <th style="width:30%">Olay</th>   
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="background-color:  #74992e; font-size: 20px; font-weight: bold;">@item.Id</td>
+                    <td style ="background-color: plum; font-size: 20px; font-weight: bold;">@item.CampaignsId</td>
+                    <td style ="background-color: plum; font-size: 20px; font-weight: bold;">@item.CampaignName</td>
+                    <td style ="background-color: mediumaquamarine; font-size: 20px; font-weight: bold;">@item.ChannelsId</td>
+                    <td style="background-color:  mediumaquamarine; font-size: 20px; font-weight: bold;">@item.ChannelType</td>
+                    <td style="background-color: yellow; font-size: 20px; font-weight: bold;">@item.ActionStartTime</td>
+                    <td style="background-color: yellow; font-size: 20px; font-weight: bold;">@item.ActionEndTime</td>
+                    <td style="background-color: yellow; font-size: 20px; font-weight: bold;">
+                        @if (item.Status)
+                        {
+                        <span style="background-color: green;  color:azure;font-size: 20px; font-weight: bold;">Aktif</span>
+                        }
+                        else
+                        {
+                        <span style="background-color: red;  color:azure;font-size: 20px; font-weight: bold;">Pasif</span>
+                        }
+                    </td>
+                    <td style="background-color: cornflowerblue; font-size: 20px; font-weight: bold;">@item.LanguageCode</td>
+                <td style="background-color: yellowgreen; font-size: 20px; font-weight: bold;"> @Html.Raw(item.Description)</td>
+                    <td style="background-color: tan; font-size: 20px; font-weight: bold;" >
+                        
+                            <a class="btn btn-dark btn-sm custom-short-btn" asp-controller="CampaignChannels" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
+                            <a class="btn btn-secondary btn-sm custom-short-btn" asp-controller="CampaignChannels" asp-action="Remove" asp-route-id="@item.Id">Kaldır</a>
+                            @if (item.Status == true)
+                            {
+                                <a id="btn_channel_@item.Id" class="btn btn-danger btn-sm custom-short-btn" href="javascript:void(0);" onclick="changeChannelStatusToFalse(@item.Id)">Pasif</a>
+                            }
+                            else
+                            {
+                                <a id="btn_channel_@item.Id" class="btn btn-success btn-sm custom-short-btn" href="javascript:void(0);" onclick="changeChannelStatusToTrue(@item.Id)">Aktif</a>
+
+                            }
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+@*</div>*@
+

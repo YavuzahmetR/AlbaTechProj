@@ -1,0 +1,67 @@
+﻿@using Layer.Core.DTOs;
+
+@{
+    ViewData["Title"] = "Update";
+}
+@model CampaignsDto
+
+<h2>KAMPANYA GÜNCELLE</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <form asp-action="Update" method="post" asp-controller="Campaigns">
+
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDate">Kampanya Başlangıç Tarihi</label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="EndDate">Kampanya Bitiş Tarihi</label>
+                <input asp-for="EndDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status">Kampanya Durumu :</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="True">Aktif</option>
+                    <option value="False">Pasif</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Kampanya Tipi</label>
+                @Html.DropDownListFor(m => m.CampaignType, (List<SelectListItem>)ViewBag.pr,  new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Priority">Öncelik:</label>
+                <input asp-for="Priority" class="form-control" type="number" />
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="button-container col-4">
+                    <button type="submit" style="width:200px" class="btn btn-success">Update</button>
+                </div>
+                <div class="button-container col-4">
+                    <button type="button" style="width:200px" class="btn btn-warning" onclick="window.location.href='/Campaigns/Index/'">Kampanyalara Dön</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+

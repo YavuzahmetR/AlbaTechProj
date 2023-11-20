@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@model List<Campaigns>
+<style>
+
+    .custom-dropdown {
+        min-width: 150px;
+        padding: 6px;
+    }
+
+    .custom-dropdown2 {
+        min-width: 150px;
+        padding: 6px;
+    }
+
+    .custom-btn {
+        width: 160px;
+        /*        margin-left:16px;*/
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btna {
+        padding: 10px;
+        background: #e21836;
+        background-image: linear-gradient(105deg, #ff5800, #e21836);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-bottom: 5px;
+        text-decoration: none;
+    }
+
+        .btna:hover {
+            background: #ff5800;
+        }
+</style>
+
+@using (Html.BeginForm("Index", "Campaigns", FormMethod.Get))
+{
+    <div class="container-fluid" style="display: flex; justify-content: space-between; align-items:center; width:100%">
+        <div style="display: flex; align-items: center;">
+            <b>Kampanya Adı</b>&nbsp; @Html.TextBox("ara", null, new { style = "width: 150px;" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+
+        <div style="display: flex; align-items: center;">
+            <b style="margin-left:15px">Kampanya Durumu </b>&nbsp; @Html.DropDownList("campaignStatusOption", ViewBag.CampaignStatusOptions as SelectList, new { @class = "custom-dropdown2" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+        <div style="display: flex; align-items: center;">
+            <b style="margin-left:15px">Kampanya Türü </b>&nbsp; @Html.DropDownList("campaignType", ViewBag.CampaignTypes as SelectList, "Hepsi", new { @class = "custom-dropdown" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid" style="display: flex; justify-content: space-between; align-items:center; width:100%">
+
+        <div style="display: flex; align-items: center;">
+            <b>Başlangıç Tarihi </b>&nbsp; @Html.TextBox("startDate", "", new { type = "date", style = "width: 150px;" })
+            <b style="margin-left:15px">Bitiş Tarihi </b>&nbsp; @Html.TextBox("endDate", "", new { type = "date", style = "width: 150px;" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+        <div style="display: flex; align-items: center;">
+            <b>Öncelik(Aralık)</b>&nbsp; @Html.TextBox("priorityFirst", "", new { type = "number", style = "width: 150px;" })
+            <b style="margin-left:15px">-</b>&nbsp; &nbsp; @Html.TextBox("priorityLast", "", new { type = "number", style = "width: 150px;" })
+            <input style="margin-left:5px" type="submit" value="Bul">
+        </div>
+    </div>
+}
+<br />
+<br />
+<div class="header-container">
+    <h2>KAMPANYALAR</h2>
+    <a href="/Campaigns/Save/" class="btna">Kampanya Ekle</a>
+</div>
+
+<table class="table table-bordered" style="text-align:center; align-items:center;">
+    <thead>
+        <tr style="background-color:  indianred; font-size: 20px; font-weight: bold;">
+            <th style="background-color: #74992e; font-size: 20px; font-weight: bold;">ID</th>
+            <th>Kampanya Adı</th>
+            <th>Kampanya Başlangıç Tarihi</th>
+            <th>Kampanya Bitiş Tarihi</th>
+            <th>Kampanya Durumu</th>
+            <th>Kampanya Öncelik</th>
+            <th>Kampanya Türü</th>
+            <th>Olay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="align-items:center;">
+                <td style="background-color:  #74992e; font-size: 20px; font-weight: bold;">@item.Id</td>
+                <td style="background-color: plum; font-size: 20px; font-weight: bold;">@item.Name</td>
+                <td style="background-color: mediumaquamarine; font-size: 20px; font-weight: bold;">@item.StartDate</td>
+                <td style="background-color: yellow; font-size: 20px; font-weight: bold;">@item.EndDate</td>
+                <td style="background-color: khaki; font-size: 20px; font-weight: bold;">
+                    @if (item.Status)
+                    {
+                        <span style="background-color: green;color:#ffffff; font-size: 20px; font-weight: bold;">Aktif</span>
+                    }
+                    else
+                    {
+                        <span style="background-color: red;color:#ffffff; font-size: 20px; font-weight: bold;">Pasif</span>
+                    }
+                </td>
+                <td style="background-color:  cornflowerblue; color:azure; font-size: 20px; font-weight: bold;">@item.Priority</td>
+                <td style="background-color:  tan; font-size: 20px; font-weight: bold;">@item.CampaignType</td>
+                <td style="background-color:  mediumseagreen; font-size: 20px; font-weight: bold;">
+
+                    <a class="btn btn-dark btn-sm custom-btn" asp-controller="Campaigns" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
+                    <a class="btn btn-secondary btn-sm custom-btn" asp-controller="Campaigns" asp-action="Remove" asp-route-id="@item.Id">Kaldır</a>
+                    @if (item.Status == true)
+                    {
+                        <a id="btn_@item.Id" class="btn btn-danger btn-sm custom-btn" href="javascript:void(0);" onclick="changeStatusToFalse(@item.Id)">Pasif</a>
+                    }
+                    else
+                    {
+                        <a id="btn_@item.Id" class="btn btn-success btn-sm custom-btn" href="javascript:void(0);" onclick="changeStatusToTrue(@item.Id)">Aktif</a>
+
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

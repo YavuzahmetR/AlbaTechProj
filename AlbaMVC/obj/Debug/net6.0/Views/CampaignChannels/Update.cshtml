@@ -1,0 +1,86 @@
+﻿@using Layer.Core.DTOs;
+
+@{
+    ViewData["Title"] = "Update";
+}
+@model CampaignChannelsDto
+
+<h2 style="align-items:center;">KAMPANYA - KANAL GÜNCELLE</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <form asp-action="Update" method="post" asp-controller="CampaignChannels">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label>Kampanya Adı</label>
+                @Html.DropDownListFor(m => m.CampaignName, (List<SelectListItem>)ViewBag.CampaignOptions, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Kanal Adı</label>
+                @Html.DropDownListFor(m => m.ChannelType, (List<SelectListItem>)ViewBag.ChannelOptions, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Dil Seçimi</label>
+                @Html.DropDownListFor(m => m.LanguageCode, (List<SelectListItem>)ViewBag.LanguageOptions, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="ActionStartTime">Aksiyon Başlangıç Tarihi</label>
+                <input asp-for="ActionStartTime" class="form-control" type="date" />
+                <span asp-validation-for="ActionStartTime" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ActionEndTime">Aksiyon Bitiş Tarihi</label>
+                <input asp-for="ActionEndTime" class="form-control" type="date" />
+                <span asp-validation-for="ActionEndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status">Kampanya Durumu :</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="True">Aktif</option>
+                    <option value="False">Pasif</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" id="tiny"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="button-container col-4">
+                    <button type="submit" style="width:200px" class="btn btn-success">Update</button>
+                </div>
+                <div class="button-container col-4">
+                    <button type="button" style="width:200px" class="btn btn-warning" onclick="window.location.href='/CampaignChannels/Index/'">Kampanyalara Dön</button>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $('#campaignSelect').change(function () {
+                        var selectedId = $(this).val();
+                        var selectedText = $('#campaignSelect option:selected').text();
+
+                        //$('#campaignIdInput').val(selectedId);
+                    });
+
+                    $('#channelSelect').change(function () {
+                        var selectedId = $(this).val();
+                        var selectedText = $('#channelSelect option:selected').text();
+
+                        //$('#channelIdInput').val(selectedId);
+                    });
+                });
+            </script>
+        </form>
+    </div>
+</div>
+

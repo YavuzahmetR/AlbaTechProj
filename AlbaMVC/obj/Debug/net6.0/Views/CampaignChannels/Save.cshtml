@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Save";
+}
+
+<h2 style="text-align:center" >KAMPANYA - KANAL EKLE</h2>
+@model CampaignChannelsDto
+<form asp-action="Save" method="post">
+    <div class="form-group">
+        <label>Kampanya Seçin</label>
+        <select id="campaignSelect" name="CampaignsId" class="form-control">
+            <option value="">Seçiniz</option>
+            @foreach (var campaignOption in ViewBag.CampaignOptions)
+            {
+                <option value="@campaignOption.Value">@campaignOption.Text</option>
+            }
+        </select>
+    </div>
+@*    <div class="form-group">
+        <label>Kampanya ID</label>
+        <input type="text" id="campaignIdInput" name="CampaignsId" class="form-control" readonly />
+    </div>*@
+    <div class="form-group">
+        <label>Kanal Seçin</label>
+        <select id="channelSelect" name="ChannelsId" class="form-control">
+            <option value="">Seçiniz</option>
+            @foreach (var channelOption in ViewBag.ChannelOptions)
+            {
+                <option value="@channelOption.Value">@channelOption.Text</option>
+            }
+        </select>
+    </div>
+@*    <div class="form-group">
+        <label>Kanal ID</label>
+        <input type="text" id="channelIdInput" name="ChannelsId" class="form-control" readonly />
+    </div>*@
+    <div class="form-group">
+        <label asp-for="ActionStartTime">Aksiyon Başlagıç Tarihi</label>
+        <input asp-for="ActionStartTime" class="form-control" type="date" />
+        <span asp-validation-for="ActionStartTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ActionEndTime">Aksiyon Bitiş Tarihi</label>
+        <input asp-for="ActionEndTime" class="form-control" type="date" />
+        <span asp-validation-for="ActionEndTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Dil Değeri</label>
+        @Html.DropDownListFor(m => m.LanguageCode, (List<SelectListItem>) ViewBag.LanguageDeger, new { @class = "form-control" })
+    </div>
+       
+    
+    <div class="form-group">
+        <label asp-for="Status">Kampanya - Kanal Durumu :</label>
+        <select asp-for="Status" class="form-control">
+            <option value="True">Aktif</option>
+            <option value="False">Pasif</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" id="tiny"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <br />
+    <div class="row" style="justify-content:space-evenly">
+        <div class="button-container col-4">
+            <button type="submit" style="width:200px; margin-left:100px;" class="btn btn-success">Güncelle</button>
+        </div>
+        <div class="button-container col-4">
+            <button type="button" style="width:200px" class="btn btn-warning" onclick="window.location.href='/CampaignChannels/Index/'">Başa Dön</button>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('#campaignSelect').change(function () {
+                var selectedId = $(this).val();
+                var selectedText = $('#campaignSelect option:selected').text();
+
+                //$('#campaignIdInput').val(selectedId); readonly barında ID gözükebilir ancak çıkardım.
+            });
+
+            $('#channelSelect').change(function () {
+                var selectedId = $(this).val();
+                var selectedText = $('#channelSelect option:selected').text();
+
+                //$('#channelIdInput').val(selectedId); readonly barında ID gözükebilir ancak çıkardım.
+            });
+        });
+    </script>
+</form>
+
+
