@@ -1,0 +1,17 @@
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Repositories.deps.json
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Repositories.runtimeconfig.json
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Repositories.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Repositories.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Core.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\bin\Debug\net6.0\Layer.Core.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.csproj.AssemblyReference.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.AssemblyInfoInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.AssemblyInfo.cs
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.csproj.CoreCompileInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.csproj.CopyComplete
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\refint\Layer.Repositories.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\Layer.Repositories.genruntimeconfig.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Repositories\obj\Debug\net6.0\ref\Layer.Repositories.dll
