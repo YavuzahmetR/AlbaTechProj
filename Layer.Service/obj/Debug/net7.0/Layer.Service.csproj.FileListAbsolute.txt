@@ -1,0 +1,17 @@
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Service.deps.json
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Service.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Service.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Core.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Repository.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Repository.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\bin\Debug\net7.0\Layer.Core.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.csproj.AssemblyReference.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.AssemblyInfoInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.AssemblyInfo.cs
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.csproj.CoreCompileInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.csproj.CopyComplete
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\refint\Layer.Service.dll
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\Layer.Service.pdb
+C:\InfoTech\Info_HI_27.07.2023\Layer.Service\obj\Debug\net7.0\ref\Layer.Service.dll
