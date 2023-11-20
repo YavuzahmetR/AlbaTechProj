@@ -1,0 +1,12 @@
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\bin\Debug\net7.0\Layer.Core.deps.json
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\bin\Debug\net7.0\Layer.Core.dll
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\bin\Debug\net7.0\Layer.Core.pdb
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.csproj.AssemblyReference.cache
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.AssemblyInfoInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.AssemblyInfo.cs
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.csproj.CoreCompileInputs.cache
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.dll
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\refint\Layer.Core.dll
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\Layer.Core.pdb
+C:\InfoTech\Info_HI_27.07.2023\AlbaTechProj\obj\Debug\net7.0\ref\Layer.Core.dll
